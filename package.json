@@ -14,6 +14,11 @@
     "test:e2e": "start-server-and-test dev http://localhost:3000 cypress"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/lab": "^6.0.0-beta.21",
+    "@mui/material": "^6.3.0",
     "axios": "^1.7.9",
     "next": "15.1.2",
     "react": "^19.0.0",
@@ -25,6 +30,7 @@
     "@testing-library/react": "^16.1.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
+    "@types/prop-types": "^15.7.14",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cypress": "^13.17.0",
