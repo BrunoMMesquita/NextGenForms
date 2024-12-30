@@ -1,4 +1,4 @@
-import { IAuthRepository } from "@/domain/repositories/IAuthRepository";
+import { IAuthRepository } from "@/domain/repositories/auth/IAuthRepository";
 import { getBase64Auth } from "@/utils";
 
 export class AuthService {

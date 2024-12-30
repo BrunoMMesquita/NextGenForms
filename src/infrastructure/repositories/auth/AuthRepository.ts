@@ -1,5 +1,5 @@
 import { AuthRequest } from "@/domain/entities/auth/AuthRequest";
-import { IAuthRepository } from "@/domain/repositories/IAuthRepository";
+import { IAuthRepository } from "@/domain/repositories/auth/IAuthRepository";
 import { services } from "@/infrastructure/config/services";
 import { axiosInstance } from "@/infrastructure/http/axiosInstance";
 
@@ -11,13 +11,14 @@ export class AuthRepository implements IAuthRepository {
       'Content-Type': 'application/x-www-form-urlencoded',
       'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
     }
-    const data = new URLSearchParams({
+    const data = {
       code,
       grant_type: grantType,
       client_id: clientId,
       redirect_uri: redirectUri
-    })
-    const response = await axiosInstance.post<string, string>(`${services.usmService}/accesstokens`, data, { headers });
-    return response;
+    }
+
+    const response = await axiosInstance.post(`${services.usmService}/oauth/accesstoken`, data, { headers });
+    return response.data.access_token;
   }
 }
