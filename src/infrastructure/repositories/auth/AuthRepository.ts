@@ -1,10 +1,10 @@
-import { AuthRequest } from "@/domain/entities/auth/AuthRequest";
+import { AuthResponse, AuthRequest } from "@/domain/entities/auth";
 import { IAuthRepository } from "@/domain/repositories/auth/IAuthRepository";
 import { services } from "@/infrastructure/config/services";
 import { axiosInstance } from "@/infrastructure/http/axiosInstance";
 
 export class AuthRepository implements IAuthRepository {
-  async getAccessToken(props: AuthRequest): Promise<string> {
+  async getAccessToken(props: AuthRequest): Promise<AuthResponse> {
     const { authBase64, clientId, grantType, redirectUri, code } = props
     const headers = {
       Authorization: `Basic ${authBase64}`,
@@ -19,6 +19,6 @@ export class AuthRepository implements IAuthRepository {
     }
 
     const response = await axiosInstance.post(`${services.usmService}/oauth/accesstoken`, data, { headers });
-    return response.data.access_token;
+    return response.data;
   }
 }

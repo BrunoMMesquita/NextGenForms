@@ -1,5 +1,5 @@
-import { AuthRequest } from "../../entities/auth/AuthRequest";
+import { AuthRequest, AuthResponse} from "../../entities/auth";
 
 export interface IAuthRepository {
-  getAccessToken(props: AuthRequest): Promise<string>;
+  getAccessToken(props: AuthRequest): Promise<AuthResponse>;
 }
