@@ -1,21 +1,26 @@
+import { getAuthCookie, uuidv4 } from '@/utils';
 import axios from 'axios';
-// import { getAccessToken } from '@/infrastructure/auth/getAccessToken';
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json;charset=utf-8',
+    Accept: 'application/json, */*',
+    'x-csrf-token': uuidv4(),
+    'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
   },
 });
 
-// Request interceptor for API token
 axiosInstance.interceptors.request.use(
   async (config) => {
-    // const token = await getAccessToken();
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
+    const access = await getAuthCookie();
+    const { accessToken, idpAccessToken, refreshToken, cryptoContextId } = access;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers['x-refresh-token'] = refreshToken;
+      config.headers['x-crypto-context'] = cryptoContextId;
+      config.headers['x-access-token'] = idpAccessToken;
+    }
     return config;
   },
   (error) => {

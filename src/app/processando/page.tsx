@@ -10,7 +10,7 @@ export default function Processing() {
     const accessToken = document.cookie.split('; ').find(row => row.startsWith('accessToken='));
 
     if (accessToken) {
-      router.push('/dashboard');
+      router.push('/produtos/lista');
     } else {
       router.push('/auth/access');
     }

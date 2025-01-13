@@ -3,7 +3,7 @@ export const redirectToSSO = () => {
   searchParams.append('response_type', `code`)
   searchParams.append('scope', ``)
   searchParams.append('client_id', `${process.env.NEXT_PUBLIC_CLIENT_ID}`)
-  searchParams.append('redirect_uri', `http://localhost:3000/auth/callback`)
+  searchParams.append('redirect_uri', `http://localhost:5000/auth/callback`)
   searchParams.append('title', `Sua jornada financeira começa agora!`)
   searchParams.append('subtitle', `Boas-vindas ao IOB Gestão Financeira!`)
   searchParams.append('isSignUpDisable', 'false')
